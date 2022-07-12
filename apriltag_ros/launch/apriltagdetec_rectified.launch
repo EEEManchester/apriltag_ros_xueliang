@@ -1,5 +1,10 @@
 <launch>
 
+  <arg name="node_namespace" default="apriltag_ros_continuous_node" />
+  <!-- Set parameters -->
+  <rosparam command="load" file="$(find apriltag_ros)/config/settings.yaml" ns="$(arg node_namespace)" />
+  <rosparam command="load" file="$(find apriltag_ros)/config/tags.yaml" ns="$(arg node_namespace)" />
+
   <node pkg="nodelet" type="nodelet" name="nodelet_service" args="manager"/>
 
   <node pkg="nodelet" type="nodelet" name="usb_camera" args="load image_proc/rectify nodelet_service">
